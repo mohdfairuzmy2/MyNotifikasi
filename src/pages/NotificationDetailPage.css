@@ -1,0 +1,99 @@
+.detail-page {
+  animation: fadeIn 0.3s ease;
+}
+
+.detail-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-md);
+}
+
+.detail-card__top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.detail-card__agency {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--purple-700);
+}
+
+.detail-card__time {
+  font-size: 0.75rem;
+  color: var(--gray-400);
+}
+
+.detail-card__title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gray-900);
+  margin-bottom: 0.75rem;
+}
+
+.detail-card__body {
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.detail-section {
+  padding: 0.75rem 0;
+  border-top: 1px solid var(--gray-100);
+}
+
+.detail-section h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--gray-700);
+  margin-bottom: 0.5rem;
+}
+
+.detail-section p {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+}
+
+.detail-section--llm {
+  background: var(--purple-50);
+  margin: 0 -1.25rem;
+  padding: 1rem 1.25rem;
+  border-top: none;
+  border-radius: var(--radius-sm);
+}
+
+.suggestion-list {
+  list-style: none;
+  padding: 0;
+}
+
+.suggestion-list li {
+  padding: 0.5rem 0.75rem;
+  background: var(--white);
+  border: 1px solid var(--purple-100);
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--purple-800);
+}
+
+.suggestion-list li::before {
+  content: '→ ';
+  color: var(--purple-600);
+}
+
+.detail-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.detail-actions .btn {
+  flex: 1;
+  min-width: 140px;
+}

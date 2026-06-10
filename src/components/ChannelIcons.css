@@ -1,0 +1,22 @@
+.channel-icons {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.channel-icons__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--purple-50);
+  border-radius: 6px;
+}
+
+.channel-icons--sm .channel-icons__item {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.3rem;
+}
+
+.channel-icons--md .channel-icons__item {
+  font-size: 1.1rem;
+  padding: 0.35rem 0.5rem;
+}

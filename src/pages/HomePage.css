@@ -1,0 +1,28 @@
+.home-page {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.home-greeting {
+  padding-top: 0.5rem;
+}
+
+.home-greeting__title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--gray-900);
+  margin-bottom: 0.25rem;
+}
+
+.home-greeting__subtitle {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+}
+
+.notification-list {
+  margin-top: 0;
+}

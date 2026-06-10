@@ -1,0 +1,30 @@
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: calc(var(--nav-height) + var(--safe-bottom));
+  padding: 0.5rem 0 var(--safe-bottom);
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+  z-index: 100;
+}
+
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 0.25rem 0.75rem;
+  color: var(--gray-500);
+  font-size: 0.65rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.bottom-nav__item.active {
+  color: var(--purple-primary);
+}
+
+.bottom-nav__item.active .bottom-nav__label {
+  font-weight: 700;
+}
