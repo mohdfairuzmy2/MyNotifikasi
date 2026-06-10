@@ -1,0 +1,82 @@
+.install-banner {
+  position: fixed;
+  bottom: calc(var(--nav-height) + var(--safe-bottom) + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 1.5rem);
+  max-width: 360px;
+  background: var(--white);
+  border: 1.5px solid var(--purple-100);
+  border-radius: var(--radius-md);
+  padding: 0.85rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 250;
+  animation: bannerIn 0.35s ease;
+}
+
+body.standalone .install-banner {
+  display: none;
+}
+
+.install-banner__content {
+  display: flex;
+  gap: 0.65rem;
+  margin-bottom: 0.65rem;
+}
+
+.install-banner__icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.install-banner__title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--purple-primary);
+}
+
+.install-banner__text {
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  line-height: 1.4;
+  margin-top: 0.15rem;
+}
+
+.install-banner__actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.install-banner__install {
+  flex: 1;
+  background: var(--purple-primary);
+  color: var(--white);
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.install-banner__dismiss {
+  width: 32px;
+  height: 32px;
+  color: var(--gray-400);
+  font-size: 0.9rem;
+  border-radius: 6px;
+}
+
+.install-banner__dismiss:hover {
+  background: var(--gray-100);
+}
+
+@keyframes bannerIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

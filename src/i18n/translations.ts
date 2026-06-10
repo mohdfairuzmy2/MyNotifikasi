@@ -120,6 +120,13 @@ type TranslationTree = {
     subtitle: string
     items: Record<string, string>
   }
+  install: {
+    title: string
+    subtitle: string
+    install: string
+    howTo: string
+    iosSteps: string
+  }
 }
 
 export const translations: Record<Language, TranslationTree> = {
@@ -274,6 +281,13 @@ export const translations: Record<Language, TranslationTree> = {
         assistant: 'Pembantu Pintar LLM',
         agency: 'Dashboard Agensi',
       },
+    },
+    install: {
+      title: 'Pasang MyNotifikasi',
+      subtitle: 'Tambah ke skrin utama untuk pengalaman seperti aplikasi.',
+      install: 'Pasang Aplikasi',
+      howTo: 'Cara Pasang',
+      iosSteps: 'Tekan Share (□↑) → "Add to Home Screen" → Tambah.',
     },
   },
   en: {
@@ -431,6 +445,13 @@ export const translations: Record<Language, TranslationTree> = {
         assistant: 'LLM Smart Assistant',
         agency: 'Agency Dashboard',
       },
+    },
+    install: {
+      title: 'Install MyNotifikasi',
+      subtitle: 'Add to home screen for a full app experience.',
+      install: 'Install App',
+      howTo: 'How to Install',
+      iosSteps: 'Tap Share (□↑) → "Add to Home Screen" → Add.',
     },
   },
 }

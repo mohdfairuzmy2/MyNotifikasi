@@ -56,6 +56,14 @@ html {
 body {
   min-height: 100dvh;
   background: #e8e4f0;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body.standalone {
+  background: var(--white);
+  user-select: none;
 }
 
 #root {
