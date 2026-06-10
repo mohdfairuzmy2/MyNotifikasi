@@ -1,15 +1,34 @@
-export const agencyLogos: Record<string, { logo: string; fallback: string }> = {
-  jim: { logo: '/logos/jim.png', fallback: 'JIM' },
-  kkm: { logo: '/logos/kkm.png', fallback: 'KKM' },
-  lhdn: { logo: '/logos/lhdn.png', fallback: 'LHDN' },
-  perkeso: { logo: '/logos/perkeso.png', fallback: 'PK' },
-  japen: { logo: '/logos/japen.png', fallback: 'JAPEN' },
-  met: { logo: '/logos/met.png', fallback: 'MET' },
-  jpj: { logo: '/logos/jpj.png', fallback: 'JPJ' },
-  kpm: { logo: '/logos/kpm.png', fallback: 'KPM' },
-  mynotifikasi: { logo: '/logos/mynotifikasi.png', fallback: 'MN' },
+import { assetUrl } from '../utils/assetUrl'
+
+export interface AgencyLogoConfig {
+  logo: string
+  fallback: string
+  scale?: number
+  objectPosition?: string
 }
 
-export function getAgencyLogo(agencyId: string) {
-  return agencyLogos[agencyId] ?? { logo: '/logos/mynotifikasi.png', fallback: agencyId.slice(0, 3).toUpperCase() }
+const configs: Record<string, Omit<AgencyLogoConfig, 'logo'> & { file: string }> = {
+  jim: { file: 'jim.png', fallback: 'JIM', scale: 1.05 },
+  kkm: { file: 'kkm.png', fallback: 'KKM', scale: 1.65, objectPosition: 'center 32%' },
+  lhdn: { file: 'lhdn.png', fallback: 'LHDN', scale: 0.92 },
+  perkeso: { file: 'perkeso.png', fallback: 'PK', scale: 1.05 },
+  japen: { file: 'japen.png', fallback: 'JAPEN', scale: 1.15 },
+  met: { file: 'met.png', fallback: 'MET', scale: 1.1 },
+  jpj: { file: 'jpj.png', fallback: 'JPJ', scale: 1.05 },
+  kpm: { file: 'kpm.png', fallback: 'KPM', scale: 1.1, objectPosition: 'center 35%' },
+  mynotifikasi: { file: 'mynotifikasi.png', fallback: 'MN', scale: 1.1 },
+}
+
+function toConfig(entry: (typeof configs)[string]): AgencyLogoConfig {
+  return {
+    logo: assetUrl(`logos/${entry.file}`),
+    fallback: entry.fallback,
+    scale: entry.scale,
+    objectPosition: entry.objectPosition,
+  }
+}
+
+export function getAgencyLogo(agencyId: string): AgencyLogoConfig {
+  const entry = configs[agencyId] ?? configs.mynotifikasi
+  return toConfig(entry)
 }
