@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
 import { useTranslations } from '../hooks/useTranslations'
+import { HOME_NOTIFICATION_IDS } from '../constants/demo'
 import { HeaderBellIcon, MenuIcon } from './icons/NavIcons'
 import './AppHeader.css'
 
@@ -14,7 +15,9 @@ interface AppHeaderProps {
 export function AppHeader({ onMenuOpen, showBack, backLabel, onBack }: AppHeaderProps) {
   const { notifications } = useApp()
   const t = useTranslations()
-  const unreadCount = notifications.filter((n) => !n.isRead).length
+  const unreadCount = notifications.filter(
+    (n) => !n.isRead && HOME_NOTIFICATION_IDS.includes(n.id),
+  ).length
 
   return (
     <header className="app-header">

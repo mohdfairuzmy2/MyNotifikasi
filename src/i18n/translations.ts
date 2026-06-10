@@ -44,6 +44,22 @@ type TranslationTree = {
     suggestions: string
     markRead: string
     takeAction: string
+    notFound: string
+  }
+  toast: {
+    markAllRead: string
+    settingsSaved: string
+    actionPassport: string
+    actionAppointment: string
+    actionRefund: string
+    actionGeneric: string
+    agencySent: string
+    agencySentScheduled: string
+    agencyFormIncomplete: string
+  }
+  profile: {
+    email: string
+    phone: string
   }
   assistant: {
     title: string
@@ -52,7 +68,7 @@ type TranslationTree = {
     send: string
     poweredBy: string
     sampleQuestions: string[]
-    responses: Record<string, string>
+    responses: Record<string, string> & { default: string }
   }
   settings: {
     title: string
@@ -93,6 +109,7 @@ type TranslationTree = {
     }
     recentCampaigns: string
     sent: string
+    openedRate: string
   }
   time: {
     today: string
@@ -155,6 +172,22 @@ export const translations: Record<Language, TranslationTree> = {
       suggestions: 'Cadangan Tindakan',
       markRead: 'Tanda Dibaca',
       takeAction: 'Ambil Tindakan',
+      notFound: 'Notifikasi tidak dijumpai.',
+    },
+    toast: {
+      markAllRead: 'Semua notifikasi ditanda dibaca.',
+      settingsSaved: 'Tetapan berjaya disimpan.',
+      actionPassport: 'Arahan navigasi ke pejabat Imigresen dibuka.',
+      actionAppointment: 'Kehadiran temujanji anda telah disahkan.',
+      actionRefund: 'Pautan semakan akaun bank dibuka.',
+      actionGeneric: 'Tindakan berjaya direkodkan.',
+      agencySent: 'Notifikasi berjaya dihantar kepada 12,450 pengguna.',
+      agencySentScheduled: 'Notifikasi dijadualkan untuk penghantaran.',
+      agencyFormIncomplete: 'Sila lengkapkan tajuk dan mesej notifikasi.',
+    },
+    profile: {
+      email: 'E-mel',
+      phone: 'Telefon',
     },
     assistant: {
       title: 'Pembantu Pintar LLM',
@@ -173,6 +206,7 @@ export const translations: Record<Language, TranslationTree> = {
         str: 'Berdasarkan profil anda, anda layak memohon Bantuan STR 2024. Dokumen yang diperlukan: salinan IC, penyata bank, dan pengesahan pendapatan. Anda boleh memohon melalui MyManfaat.',
         documents: 'Dokumen yang belum lengkap: (1) Salinan IC untuk permohonan STR, (2) Pengesahan temujanji klinik. Muat naik melalui MyDigital ID untuk proses lebih pantas.',
         appointment: 'Temujanji anda di Klinik Kesihatan Putrajaya pada 25 Mei 2024, jam 2:30 petang. Lokasi: Presint 11, Putrajaya. Cadangan: Tiba 15 minit awal dan bawa kad pengenalan.',
+        default: 'Saya boleh bantu ringkaskan notifikasi, semak kelayakan bantuan, atau ingatkan temujanji anda. Cuba soalan sampel di atas.',
       },
     },
     settings: {
@@ -221,6 +255,7 @@ export const translations: Record<Language, TranslationTree> = {
       },
       recentCampaigns: 'Kempen Terkini',
       sent: 'dihantar',
+      openedRate: 'dibuka',
     },
     time: {
       today: 'Hari ini',
@@ -290,6 +325,22 @@ export const translations: Record<Language, TranslationTree> = {
       suggestions: 'Suggested Actions',
       markRead: 'Mark as Read',
       takeAction: 'Take Action',
+      notFound: 'Notification not found.',
+    },
+    toast: {
+      markAllRead: 'All notifications marked as read.',
+      settingsSaved: 'Settings saved successfully.',
+      actionPassport: 'Navigation to Immigration office opened.',
+      actionAppointment: 'Your appointment attendance has been confirmed.',
+      actionRefund: 'Bank account check link opened.',
+      actionGeneric: 'Action recorded successfully.',
+      agencySent: 'Notification sent to 12,450 users.',
+      agencySentScheduled: 'Notification scheduled for delivery.',
+      agencyFormIncomplete: 'Please complete the title and message.',
+    },
+    profile: {
+      email: 'Email',
+      phone: 'Phone',
     },
     assistant: {
       title: 'LLM Smart Assistant',
@@ -311,6 +362,8 @@ export const translations: Record<Language, TranslationTree> = {
           'Incomplete documents: (1) IC copy for STR application, (2) Clinic appointment confirmation. Upload via MyDigital ID for faster processing.',
         appointment:
           'Your appointment at Putrajaya Health Clinic on 25 May 2024, at 2:30 PM. Location: Presint 11, Putrajaya. Tip: Arrive 15 minutes early and bring your ID card.',
+        default:
+          'I can help summarise notifications, check aid eligibility, or remind you about appointments. Try a sample question above.',
       },
     },
     settings: {
@@ -359,6 +412,7 @@ export const translations: Record<Language, TranslationTree> = {
       },
       recentCampaigns: 'Recent Campaigns',
       sent: 'sent',
+      openedRate: 'opened',
     },
     time: {
       today: 'Today',

@@ -1,4 +1,5 @@
 import { useApp } from '../context/AppContext'
+import { useToast } from '../components/Toast'
 import { useTranslations } from '../hooks/useTranslations'
 import type { Language } from '../types'
 import './SettingsPage.css'
@@ -13,7 +14,13 @@ export function SettingsPage() {
     saveSettings,
     settingsSaved,
   } = useApp()
+  const { showToast } = useToast()
   const t = useTranslations()
+
+  const handleSave = () => {
+    saveSettings()
+    showToast(t.toast.settingsSaved)
+  }
 
   return (
     <div className="settings-page">
@@ -90,7 +97,7 @@ export function SettingsPage() {
         <p>{t.settings.pdpaText}</p>
       </section>
 
-      <button className="btn btn--primary btn--full" onClick={saveSettings}>
+      <button className="btn btn--primary btn--full" onClick={handleSave}>
         {settingsSaved ? t.settings.saved : t.settings.save}
       </button>
     </div>

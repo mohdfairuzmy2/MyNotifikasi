@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useApp } from '../context/AppContext'
 import { useTranslations } from '../hooks/useTranslations'
 import './AssistantPage.css'
@@ -22,19 +22,24 @@ function getResponse(question: string, t: ReturnType<typeof useTranslations>): s
   if (q.includes('temujanji') || q.includes('klinik') || q.includes('appointment') || q.includes('clinic')) {
     return t.assistant.responses.appointment
   }
-  return t.assistant.responses.important
+  return t.assistant.responses.default
 }
 
 export function AssistantPage() {
   const { user } = useApp()
   const t = useTranslations()
   const [input, setInput] = useState('')
+  const chatRef = useRef<HTMLDivElement>(null)
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
       text: `${t.home.greeting} ${user.name}! ${t.assistant.subtitle}`,
     },
   ])
+
+  useEffect(() => {
+    chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: 'smooth' })
+  }, [messages])
 
   const sendMessage = (text: string) => {
     if (!text.trim()) return
@@ -62,7 +67,7 @@ export function AssistantPage() {
         ))}
       </div>
 
-      <div className="chat-messages">
+      <div className="chat-messages" ref={chatRef}>
         {messages.map((msg, i) => (
           <div key={i} className={`chat-bubble chat-bubble--${msg.role}`}>
             {msg.role === 'assistant' && <span className="chat-avatar">🤖</span>}

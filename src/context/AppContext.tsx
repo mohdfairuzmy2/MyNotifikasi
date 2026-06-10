@@ -2,6 +2,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -35,13 +36,40 @@ const defaultChannels: ChannelPreference[] = [
   { channel: 'whatsapp', enabled: false },
 ]
 
+const STORAGE_KEY = 'mynotifikasi-demo'
+
+interface StoredState {
+  language?: Language
+  notifications?: Notification[]
+  channelPreferences?: ChannelPreference[]
+}
+
+function loadStoredState(): StoredState {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    return raw ? (JSON.parse(raw) as StoredState) : {}
+  } catch {
+    return {}
+  }
+}
+
 const AppContext = createContext<AppContextValue | null>(null)
 
 export function AppProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('ms')
-  const [notifications, setNotifications] = useState<Notification[]>(mockNotifications)
-  const [channelPreferences, setChannelPreferences] = useState(defaultChannels)
+  const stored = loadStoredState()
+  const [language, setLanguageState] = useState<Language>(stored.language ?? 'ms')
+  const [notifications, setNotifications] = useState<Notification[]>(
+    stored.notifications ?? mockNotifications,
+  )
+  const [channelPreferences, setChannelPreferences] = useState<ChannelPreference[]>(
+    stored.channelPreferences ?? defaultChannels,
+  )
   const [settingsSaved, setSettingsSaved] = useState(false)
+
+  useEffect(() => {
+    const payload: StoredState = { language, notifications, channelPreferences }
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload))
+  }, [language, notifications, channelPreferences])
 
   const user: UserProfile = {
     name: 'Aisyah',
@@ -50,6 +78,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     email: 'aisyah.rahman@email.com',
     phone: '+60 12-345 6789',
   }
+
+  const setLanguage = useCallback((lang: Language) => {
+    setLanguageState(lang)
+    setSettingsSaved(false)
+  }, [])
 
   const markAsRead = useCallback((id: string) => {
     setNotifications((prev) =>

@@ -79,6 +79,11 @@
   margin-bottom: 0.5rem;
   font-size: 0.85rem;
   color: var(--purple-800);
+  cursor: pointer;
+}
+
+.suggestion-list li:hover {
+  background: var(--purple-50);
 }
 
 .suggestion-list li::before {

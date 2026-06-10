@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useApp } from '../context/AppContext'
+import { useToast } from '../components/Toast'
 import { useTranslations } from '../hooks/useTranslations'
 import { formatNotificationTime } from '../utils/formatTime'
 import { AgencyAvatar } from '../components/AgencyAvatar'
@@ -8,9 +9,17 @@ import { TagBadge } from '../components/TagBadge'
 import { ChannelIcons } from '../components/ChannelIcons'
 import './NotificationDetailPage.css'
 
+function getActionToast(agencyId: string, t: ReturnType<typeof useTranslations>): string {
+  if (agencyId === 'jim') return t.toast.actionPassport
+  if (agencyId === 'kkm' || agencyId === 'jpj') return t.toast.actionAppointment
+  if (agencyId === 'lhdn') return t.toast.actionRefund
+  return t.toast.actionGeneric
+}
+
 export function NotificationDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { notifications, markAsRead, language } = useApp()
+  const { showToast } = useToast()
   const t = useTranslations()
 
   const notification = notifications.find((n) => n.id === id)
@@ -24,10 +33,14 @@ export function NotificationDetailPage() {
   if (!notification) {
     return (
       <div className="detail-page">
-        <p>Notifikasi tidak dijumpai.</p>
-        <Link to="/">Kembali</Link>
+        <p>{t.detail.notFound}</p>
+        <Link to="/">{t.detail.back}</Link>
       </div>
     )
+  }
+
+  const handleAction = () => {
+    showToast(getActionToast(notification.agencyId, t))
   }
 
   return (
@@ -71,7 +84,9 @@ export function NotificationDetailPage() {
             <h3>💡 {t.detail.suggestions}</h3>
             <ul className="suggestion-list">
               {notification.llmSuggestions.map((s, i) => (
-                <li key={i}>{s[language]}</li>
+                <li key={i} onClick={() => showToast(s[language])}>
+                  {s[language]}
+                </li>
               ))}
             </ul>
           </div>
@@ -84,7 +99,9 @@ export function NotificationDetailPage() {
             </Link>
           )}
           {notification.actionLabel && (
-            <button className="btn btn--primary">{notification.actionLabel[language]}</button>
+            <button className="btn btn--primary" onClick={handleAction}>
+              {notification.actionLabel[language]}
+            </button>
           )}
         </div>
       </div>

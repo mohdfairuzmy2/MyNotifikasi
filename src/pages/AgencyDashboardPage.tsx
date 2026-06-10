@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useApp } from '../context/AppContext'
+import { useToast } from '../components/Toast'
 import { useTranslations } from '../hooks/useTranslations'
 import type { NotificationCategory } from '../types'
 import './AgencyDashboardPage.css'
@@ -34,6 +36,8 @@ const categories: NotificationCategory[] = [
 ]
 
 export function AgencyDashboardPage() {
+  const { language } = useApp()
+  const { showToast } = useToast()
   const t = useTranslations()
   const [showPreview, setShowPreview] = useState(false)
   const [form, setForm] = useState({
@@ -49,6 +53,22 @@ export function AgencyDashboardPage() {
   const update = (key: string, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }))
   }
+
+  const handleSend = () => {
+    const hasContent =
+      (language === 'ms' ? form.titleMs && form.bodyMs : form.titleEn && form.bodyEn) ||
+      (form.titleMs && form.bodyMs)
+
+    if (!hasContent) {
+      showToast(t.toast.agencyFormIncomplete)
+      return
+    }
+
+    showToast(form.schedule ? t.toast.agencySentScheduled : t.toast.agencySent)
+  }
+
+  const previewTitle = language === 'en' && form.titleEn ? form.titleEn : form.titleMs
+  const previewBody = language === 'en' && form.bodyEn ? form.bodyEn : form.bodyMs
 
   return (
     <div className="agency-page">
@@ -161,14 +181,16 @@ export function AgencyDashboardPage() {
             <button className="btn btn--secondary" onClick={() => setShowPreview(!showPreview)}>
               {t.agency.form.preview}
             </button>
-            <button className="btn btn--primary">{t.agency.form.send}</button>
+            <button className="btn btn--primary" onClick={handleSend}>
+              {t.agency.form.send}
+            </button>
           </div>
 
-          {showPreview && (form.titleMs || form.bodyMs) && (
+          {showPreview && (previewTitle || previewBody) && (
             <div className="preview-card">
               <p className="preview-card__agency">{form.agency}</p>
-              <h3>{form.titleMs || '(Tajuk)'}</h3>
-              <p>{form.bodyMs || '(Mesej)'}</p>
+              <h3>{previewTitle || (language === 'ms' ? '(Tajuk)' : '(Title)')}</h3>
+              <p>{previewBody || (language === 'ms' ? '(Mesej)' : '(Message)')}</p>
             </div>
           )}
         </div>
@@ -184,8 +206,12 @@ export function AgencyDashboardPage() {
                 <p className="campaign-item__date">{c.date}</p>
               </div>
               <div className="campaign-item__stats">
-                <span>{c.sent.toLocaleString()} {t.agency.sent}</span>
-                <span>{Math.round((c.opened / c.sent) * 100)}% dibuka</span>
+                <span>
+                  {c.sent.toLocaleString()} {t.agency.sent}
+                </span>
+                <span>
+                  {Math.round((c.opened / c.sent) * 100)}% {t.agency.openedRate}
+                </span>
               </div>
             </div>
           ))}

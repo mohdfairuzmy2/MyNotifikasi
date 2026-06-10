@@ -34,11 +34,11 @@ export function ProfilePage() {
 
       <div className="profile-info">
         <div className="profile-info__row">
-          <span>E-mel</span>
+          <span>{t.profile.email}</span>
           <span>{user.email}</span>
         </div>
         <div className="profile-info__row">
-          <span>Telefon</span>
+          <span>{t.profile.phone}</span>
           <span>{user.phone}</span>
         </div>
       </div>

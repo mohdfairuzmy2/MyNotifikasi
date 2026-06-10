@@ -3,12 +3,12 @@ import { useTranslations } from '../hooks/useTranslations'
 import './ServicesPage.css'
 
 const services = [
-  { icon: '🛂', key: 'immigration', to: '/notifications' },
-  { icon: '🏥', key: 'clinic', to: '/notifications' },
-  { icon: '🚗', key: 'jpj', to: '/notifications' },
-  { icon: '💰', key: 'tax', to: '/notifications' },
-  { icon: '🛡️', key: 'perkeso', to: '/notifications' },
-  { icon: '🎓', key: 'education', to: '/notifications' },
+  { icon: '🛂', key: 'immigration', to: '/notifications?filter=important' },
+  { icon: '🏥', key: 'clinic', to: '/notifications?filter=services' },
+  { icon: '🚗', key: 'jpj', to: '/notifications?filter=services' },
+  { icon: '💰', key: 'tax', to: '/notifications?filter=all' },
+  { icon: '🛡️', key: 'perkeso', to: '/notifications?filter=all' },
+  { icon: '🎓', key: 'education', to: '/notifications?filter=all' },
   { icon: '🤖', key: 'assistant', to: '/assistant' },
   { icon: '📊', key: 'agency', to: '/agency' },
 ]
