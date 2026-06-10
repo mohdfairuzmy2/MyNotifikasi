@@ -2,7 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const isGitHubPages = process.env.GITHUB_PAGES === 'true'
+const base = isGitHubPages ? '/MyNotifikasi/' : '/'
+
 export default defineConfig({
+  base,
   plugins: [
     react(),
     VitePWA({
@@ -16,7 +20,7 @@ export default defineConfig({
         background_color: '#F5F3FF',
         display: 'standalone',
         orientation: 'portrait-primary',
-        start_url: '/',
+        start_url: base,
         icons: [
           {
             src: 'pwa-192x192.png',
